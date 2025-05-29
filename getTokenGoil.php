@@ -1,11 +1,11 @@
 <?php
 session_start(); // Inicia la sesión
-$login = $_SESSION['login'] ?? "login";
+$login = $_SESSION['login'] ?? "login"; // Para ver si es cliente o empresa
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Recibir el Access Token enviado desde JavaScript
     $phoneVerificationToken = $_POST["accessToken"] ?? '';
-    $clientId = "67502b36e2f4680020253de7";
-    $loginUrl = 'https://community.goil.app/api/v1/authentication/login';
+    $clientId = "******"; // Goil client id
+    $loginUrl = '*******'; // Goil login url
 
     if (!empty($phoneVerificationToken)) {
         $postFields = [
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             curl_close($ch);
             // exit;
             sleep(2);
-            header('Location: https://blocktravelagency.com/' . $login);   //redirigir al login
+            header('Location: https://blocktravelagency.com/' . $login);   // Redirigir al login
         }
         // Cierra cURL
         curl_close($ch);
@@ -43,12 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $data = json_decode($response, true);
         // Verifica si la autenticación fue exitosa
         if (isset($data)) {
-            $accessToken = $data['data']['userAccounts'][0]['accessToken'] ?? 'Token no encontrado';
-
-           
+            $accessToken = $data['data']['userAccounts'][0]['accessToken'] ?? 'Token no encontrado';           
             $_SESSION['access_token_goil'] = $accessToken;
             header('Location: authGoil.php'); // Redirige a la página donde usarás el token
-
             exit();
         } else {
             // Manejo de errores
@@ -61,11 +58,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         echo "No se recibió un token.";
         sleep(2);
-        header('Location: https://blocktravelagency.com/' . $login);   //redirigir al login
+        header('Location: https://blocktravelagency.com/' . $login);   // Redirigir al login
     }
 } else {
     echo "Método no permitido.";
     sleep(2);
-    header('Location: https://blocktravelagency.com/' . $login);   //redirigir al login
+    header('Location: https://blocktravelagency.com/' . $login);   // Redirigir al login
 }
 ?>
