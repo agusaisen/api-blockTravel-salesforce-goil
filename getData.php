@@ -56,6 +56,6 @@ if (isset($data)) {
          "accountId" => $accountId,
     ];
     echo json_encode($datos, JSON_UNESCAPED_UNICODE);
-   // header('Location: https://blocktravelagency.com/' . $login);   // Redirigir al login
+
 }
 ?>
