@@ -4,8 +4,6 @@ if (isset($_SESSION['access_token'])) {
     $accessToken = $_SESSION['access_token'];
     $instanceUrl = $_SESSION['instance_url'];
     $documentId = $_GET['fileId'];
-    //$documentId="069Tg00000FRv3GIAT";
-    //$usrId = $_SESSION['usr_id'];
    
 // URL para acceder al contenido del archivo
 $fileUrl = "$instanceUrl/services/data/v62.0/connect/files/$documentId/content";
