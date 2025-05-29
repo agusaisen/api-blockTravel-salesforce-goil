@@ -1,9 +1,9 @@
 <?php
 session_start(); // Inicia la sesión
-$login = $_SESSION['login'] ?? "login";
+$login = $_SESSION['login'] ?? "login"; // Para ver si es en cliente o empresa
 if (isset($_SESSION['access_token_goil'])) {
     $accessToken = $_SESSION['access_token_goil'];
-    $url = 'https://community.goil.app/api/v1/authentication/authenticate';
+    $url = '*******'; // Goil auth url
     $headers = [
         'x-client-platform: webclient-platform',
         'Authorization: Bearer: ' . $accessToken,
@@ -38,7 +38,7 @@ if (isset($_SESSION['access_token_goil'])) {
             'x-client-platform: webclient-platform',
             'Authorization: Bearer: ' . $accessToken2,
         ];
-        $endpoint = 'https://community.goil.app/api/v2/integrations/67950c0dc8924b6edb81682d';
+        $endpoint = '*********'; //Goil endpoint url
         $ch2 = curl_init();
         // Configurar las opciones de cURL
         curl_setopt($ch2, CURLOPT_URL, $endpoint);
@@ -49,7 +49,7 @@ if (isset($_SESSION['access_token_goil'])) {
         // Verificar si ocurrió un error en la solicitud
         if (curl_errno($ch2)) {
             echo 'Error de cURL: ' . curl_error($ch2);
-            header('Location: https://blocktravelagency.com/'.$login);   //redirigir al login
+            header('Location: https://blocktravelagency.com/'.$login);   // redirigir al login
         }
         $data2 = json_decode($response2, true);
         // Cerrar la conexión cURL
@@ -60,13 +60,13 @@ if (isset($_SESSION['access_token_goil'])) {
             //echo "Salesforce id: ".$usr_id;
             if($usr_id == 'id no encontrado'){
                 echo "Hubo un error al obtener los datos";
-                header('Location: https://blocktravelagency.com/'.$login.'?error=1');   //redirigir al login con mensaje de error de teléfono no encontrado
+                header('Location: https://blocktravelagency.com/'.$login.'?error=1');   // Redirigir al login con mensaje de error de teléfono no encontrado
             }
             $_SESSION['usr_id'] = $usr_id;
             header('Location: getTokenSalesforce.php'); // Redirige a la página donde usarás el token
         } else {
             echo "Hubo un error al obtener los datos";
-            header('Location: https://blocktravelagency.com/'.$login);   //redirigir al login
+            header('Location: https://blocktravelagency.com/'.$login);   // Redirigir al login
         }
 
     }
@@ -74,6 +74,6 @@ if (isset($_SESSION['access_token_goil'])) {
 
 } else {
     echo "No se encontró el token de acceso.";
-    header('Location: https://blocktravelagency.com/'.$login);   //redirigir al login
+    header('Location: https://blocktravelagency.com/'.$login);   // Redirigir al login
 }
 ?>
